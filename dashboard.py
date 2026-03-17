@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sqlalchemy import create_engine
 
-# 1. Conexão com o Data Warehouse
 engine = create_engine('postgresql://postgres:masterkey@localhost:5432/business')
 
 sns.set_theme(style="whitegrid")
@@ -21,7 +20,6 @@ def gerar_grafico(query, x, y, titulo, tipo='bar', hue=None, is_pie=False):
         sns.lineplot(data=df, x=x, y=y, hue=hue, marker='o')
         plt.xticks(rotation=45)
     else:
-        # Ordenar barras para melhor visualização
         if x == 'total_acumulado' or x == 'total' or x == 'qtd' or x == 'media':
              df = df.sort_values(by=x, ascending=False)
         sns.barplot(data=df, x=x, y=y, hue=hue, palette='viridis')
@@ -31,7 +29,6 @@ def gerar_grafico(query, x, y, titulo, tipo='bar', hue=None, is_pie=False):
     plt.show()
 
 if __name__ == "__main__":
-    print("Gerando Dashboards do Data Warehouse...")
 
     # --- 1. Gasto Total Acumulado por Titular (Pergunta 5.1.1) ---
     q0 = """
